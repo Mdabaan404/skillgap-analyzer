@@ -1,0 +1,25 @@
+﻿food,calories(per100g),carbohydrates(g),protein(g),fat(g),fiber(g),sodium(mg),cholesterol(mg),notes
+Apple,52,14,0.3,0.2,2.4,1,0,Rich in fiber and vitamin C
+Orange,47,12,0.9,0.1,2.4,0,0,High in vitamin C
+Berries (mixed),50-60,12,12,0.3-0.5,03-Jun,0,0,Rich in antioxidants
+Banana,89,23,1.1,0.3,2.6,1,0,High in potassium
+Spinach,23,3.6,2.9,0.4,2.2,79,0,Rich in iron and vitamins A & K
+Broccoli,34,7,2.8,0.4,2.6,33,0,High in vitamins C and K
+Carrots,41,10,0.9,0.2,2.8,69,0,Good source of beta-carotene
+Bell Peppers,20,4.7,0.9,0.2,1.7,2,0,High in vitamins A and C
+Oats,389,66,16,7,10,2,0,High in fiber and protein
+Brown Rice,123,25,2.7,1,1.8,0,0,Source of magnesium
+Quinoa,368,64,14,6,7,7,0,Complete protein source
+Skinless Poultry,165,0,31,3.6,0,60,70,"High in protein, low in fat"
+Salmon,206,0,22,13,0,60,63,High in omega-3 fatty acids
+Lentils,116,20,9,0.4,8,6,0,Good source of plant-based protein
+Low-Fat Yogurt,59,7.7,10,1.5,0,46,5,Lower in fat compared to regular yogurt
+Low-Fat Milk,42,5,3.4,1,0,44,10,Lower in fat compared to whole milk
+Avocado,160,9,2,15,7,7,0,High in monounsaturated fats
+Olive Oil,884,0,0,100,0,2,0,Rich in monounsaturated fats
+Walnuts,654,14,15,65,7,2,0,High in omega-3 fatty acids
+Processed Foods,Varies (often high),Varies (often high),Varies (often high),Varies (often high),Varies (often high),Often high,Varies (often high),High sodium content; avoid or limit
+Sugary Drinks,40-60 (per 100 ml),42278,0,0,0,45570,0,High in added sugars; limit intake
+Wine,85,2.6,0.1,0,0,0,0,Moderate consumption can be beneficial
+Beer,43,3.6,0.5,0,0,7,0,Limit to moderate consumption
+Lean Meats,70,0,31,3.6,0,60,70,Low in cholesterol compared to fatty meats

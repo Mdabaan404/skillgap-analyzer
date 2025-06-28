@@ -1,0 +1,27 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.so
+
+# Environment variables
+.env
+*.env
+
+# Flask & workspace directories
+instance/
+workspace/
+*.sqlite3
+
+# System files
+.DS_Store
+
+# IDEs
+.vscode/
+.idea/
+
+# Secret keys or credentials
+*.key
+*.pem
+*.bak

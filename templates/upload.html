@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="../static/css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+</head>
+
+<body>
+
+    <div class="d-flex flex-column min-vh-100">
+
+        <nav class="navbar navbar-expand-lg bg-success border-success border-bottom">
+            <div class="container-fluid my-1 mx-5">
+                <a class="navbar-brand text-white fw-bold fs-5" href="#">
+                    <i class="fa-solid fa-file-invoice"></i> SKILL GAP ANALYSIS</a>
+                <button class="navbar-toggler shadow-none border-0" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fa-solid fa-bars text-light"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0 gap-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-white fw-bold" href="/userhome">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white fw-bold text-decoration-underline link-offset-2 active"
+                                href="/upload">Upload</a>
+                        </li>
+                         
+                        <li class="nav-item">
+                            <a class="nav-link text-white fw-bold" href="/ulogout">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+        {% if success %}
+        <div class="position-fixed top-0 toastae start-50 translate-middle-x p-3" style="z-index: 11">
+            <div id="liveToast1" class="toast bg-success bg-opacity-75 hide" role="alert" aria-live="assertive"
+                aria-atomic="true">
+                <div class="d-flex">
+                    <div class="toast-body ms-auto text-white">
+                        {{success}}
+                    </div>
+                    <button type="button" class="btn-close shadow-none btn-close-white me-2 m-auto"
+                        data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+        <div class="container bg-white my-4">
+
+            <div class="d-flex mt-5 mb-3">
+                <h3 class="text-dark-emphasis link-offset-1 text-decoration-underline flex-grow-1 flex-md-grow-0">
+                    Upload PDF
+                </h3>
+            </div>
+
+            <form method="post" id="uploadimageform" enctype="multipart/form-data">
+
+                <div class="row justify-content-center mb-3 mt-4">
+
+                    <div class="col-md-8 position-relative">
+                        <label for="file" class="form-label">PDF File:</label>
+                        <input type="file" class="form-control shadow-none border-dark" name="file" id="file"
+                            accept="application/pdf" required>
+                        <div class="invalid-tooltip rounded-3">
+                            * Select PDF File
+                        </div>
+                    </div>
+
+                    <div class="col-md-8 position-relative mt-3">
+                        <label for="job_designation" class="form-label">Job Designation:</label>
+                        <input type="text" class="form-control shadow-none border-dark" name="job_designation" 
+                            id="job_designation" required placeholder="e.g., Software Engineer, Data Analyst">
+                        <div class="invalid-tooltip rounded-3">
+                            * Please enter job designation
+                        </div>
+                    </div>
+
+                    <div class="col-md-4 mt-3">
+                        <label class="form-label d-block">&nbsp;</label>
+                        <div class="d-flex gap-2">
+                            <button type="submit" id="submitbutton" class="btn btn-dark shadow-none w-100">Upload
+                                File</button>
+                        </div>
+                    </div>
+
+                </div>
+
+                {% if skill_gap_analysis %}
+                <div class="row mt-5">
+                    <div class="col-12">
+                        <h4>Skill Gap Analysis:</h4>
+                        <div class="card mt-3">
+                            <div class="card-body">
+                                {% if skill_gap_analysis.analysis %}
+                                    <p class="card-text">{{ skill_gap_analysis.analysis }}</p>
+                                {% endif %}
+                                
+                                {% if skill_gap_analysis.missing_skills %}
+                                    <h5 class="mt-3">Missing Skills:</h5>
+                                    <ul class="list-group list-group-flush">
+                                        {% for skill in skill_gap_analysis.missing_skills %}
+                                            <li class="list-group-item">{{ skill }}</li>
+                                        {% endfor %}
+                                    </ul>
+                                {% else %}
+                                    <p class="text-muted">No significant skill gaps found.</p>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                {% endif %}
+                
+                {% if job_results %}
+                <h4 class="mt-5">Recommended Jobs:</h4>
+                <div class="row g-4 mt-4">
+                    {% for job in job_results %}
+                    <div class="col-md-4">
+                        <div class="card h-100">
+                            <div class="card-body">
+                                <h5 class="card-title mb-3">{{ job.title }}</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">{{ job.company.display_name }}</h6>
+
+                                <p class="card-text mb-4">
+                                    {{ job.location.display_name }}
+                                </p>
+
+                                <p class="card-text mb-2">
+                                    <span class="short-text">{{ job.description[:100] }}...</span>
+                                    <span class="full-text d-none">{{ job.description }}</span>
+                                    <a href="#" class="read-more">Read more</a>
+                                </p>
+
+                                <div class="d-flex flex-column justify-content-start">
+                                    <span class="py-2">{{ job.category.label }}</span>
+                                    <small class="text-muted">
+                                        Posted: {{ job.created.split('T')[0] }}
+                                    </small>
+                                </div>
+                            </div>
+                            <div class="card-footer">
+                                <a href="{{ job.redirect_url }}" class="btn btn-primary btn-sm shadow-none w-100" target="_blank">
+                                    View Job
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                {% endif %}
+                
+                {% if video_tutorials %}
+                <div class="row mt-4 gy-4">  
+                    <h4 class="mb-4">Suggested Video Tutorials:</h4> 
+            
+                    {% for keyword, tutorials_list in video_tutorials.items() %}
+                        {% if tutorials_list %}  
+                        <div class="col-md-4">
+                            <h5>Tutorials for: {{ keyword | title }}</h5>
+                            <ul> 
+                                {% for tutorial in tutorials_list %}
+                                    <li>
+                                        <a href="{{ tutorial.link }}" target="_blank" rel="noopener noreferrer">
+                                            {{ tutorial.title }}
+                                        </a>
+                                    </li>
+                                {% endfor %}  
+                            </ul>
+                        </div>  
+                        {% endif %}  
+                    {% endfor %}  
+                </div>  
+                {% elif success %}  
+                <div class="results-section video-tutorials">
+                    <h2>Suggested Video Tutorials</h2>
+                    <p>No relevant video tutorials were found based on the extracted keywords.</p>
+                </div>
+                {% endif %}   
+
+            </form>
+
+        </div>
+
+    </div>
+
+    <script src="../static/js/jquery.js"></script>
+    <script src="../static/js/bootstrap.js"></script>
+
+    <script>
+        $(function () {
+            $('.toast').toast('show');
+
+            $('.read-more').click(function (e) {
+                e.preventDefault();
+                var $this = $(this);
+                var $cardText = $this.closest('.card-text');
+
+                $cardText.find('.short-text').toggleClass('d-none');
+                $cardText.find('.full-text').toggleClass('d-none');
+
+                if ($this.text() === "Read more") {
+                    $this.text("Show less");
+                } else {
+                    $this.text("Read more");
+                }
+            });
+
+            $("#uploadimageform").on("submit", function (e) {
+                var file = $("#file").val()
+                var jobDesignation = $("#job_designation").val()
+
+                if (file != "") {
+                    $("#file").removeClass("is-invalid");
+                } else {
+                    $("#file").addClass("is-invalid");
+                    e.preventDefault();
+                }
+
+                if (jobDesignation != "") {
+                    $("#job_designation").removeClass("is-invalid");
+                } else {
+                    $("#job_designation").addClass("is-invalid");
+                    e.preventDefault();
+                }
+            })
+        })
+    </script>
+
+</body>
+</html>

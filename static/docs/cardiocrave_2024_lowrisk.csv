@@ -1,0 +1,14 @@
+﻿food,calories(per100g),carbohydrates(g),protein(g),fat(g),fiber(g),sodium(mg),cholesterol(mg),notes
+Apple,52,14,0.3,0.2,2.4,1,0,Rich in fiber and vitamin C
+Berries (mixed),50-60,12,01-Feb,0.3-0.5,03-Jun,0,0,Rich in antioxidants
+Banana,89,23,1.1,0.3,2.6,1,0,High in potassium
+Kiwi,61,15,1.1,0.5,3,3,0,High in vitamin C and E
+Leafy Greens,23,3.6,2.9,0.4,2.2,79,0,Rich in iron and vitamins A & K
+Tomatoes,18,3.9,0.9,0.2,1.2,5,0,Rich in lycopene and vitamins C
+Cucumbers,16,3.6,0.7,0.1,0.5,2,0,Hydrating and low in calories
+Oats,389,66,16,7,10,2,0,High in fiber and protein
+Quinoa,368,64,14,6,7,7,0,Complete protein source
+Skinless Poultry,165,0,31,3.6,0,60,70,"High in protein, low in fat"
+Fish,206,0,22,13,0,60,63,High in omega-3 fatty acids
+Eggs,155,1.1,13,11,0,124,372,High in cholesterol; consume in moderation
+Low-Fat Yogurt,59,7.7,10,1.5,0,46,5,Lower in fat

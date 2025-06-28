@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home</title>
+    <link rel="stylesheet" href="../static/css/bootstrap.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css">
+    <style>
+        .form-control {
+            box-shadow: none !important;
+        }
+
+        .form-select {
+            box-shadow: none !important;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="d-flex flex-column min-vh-100">
+
+        <nav class="navbar navbar-expand-lg bg-success border-success border-bottom">
+            <div class="container-fluid my-1 mx-5">
+                <a class="navbar-brand text-white fw-bold fs-5" href="#">
+                    <i class="fa-solid fa-file-invoice"></i> SKILL GAP ANALYSIS</a>
+                <button class="navbar-toggler shadow-none border-0" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
+                    aria-expanded="false" aria-label="Toggle navigation">
+                    <i class="fa-solid fa-bars text-light"></i>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav ms-auto mb-2 mb-lg-0 gap-1">
+                        <li class="nav-item">
+                            <a class="nav-link text-white fw-bold" href="/userhome">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white fw-bold" href="/upload">Upload</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white fw-bold text-decoration-underline link-offset-2 active"
+                                href="/udata">Data</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-white fw-bold" href="/ulogout">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+
+
+
+
+        {% if 'upload' in get_flashed_messages() %}
+        <div class="position-fixed top-0 toastae start-50 translate-middle-x p-3" style="z-index: 11">
+            <div id="liveToast1" class="toast bg-success bg-opacity-75 hide" role="alert" aria-live="assertive"
+                aria-atomic="true">
+                <div class="d-flex">
+                    <div class="toast-body ms-auto text-white">
+                        Data saved successfully
+                    </div>
+                    <button type="button" class="btn-close shadow-none btn-close-white me-2 m-auto"
+                        data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+
+
+
+
+        {% if 'failed' in get_flashed_messages() %}
+        <div class="position-fixed top-0 toastae start-50 translate-middle-x p-3" style="z-index: 11">
+            <div id="liveToast1" class="toast bg-danger bg-opacity-75 hide" role="alert" aria-live="assertive"
+                aria-atomic="true">
+                <div class="d-flex">
+                    <div class="toast-body ms-auto text-white">
+                        Data saving failed
+                    </div>
+                    <button type="button" class="btn-close shadow-none btn-close-white me-2 m-auto"
+                        data-bs-dismiss="toast" aria-label="Close"></button>
+                </div>
+            </div>
+        </div>
+        {% endif %}
+
+
+
+
+        <div class="container bg-white my-4">
+
+            <div class="d-flex mt-5 mb-3">
+                <h3 class="text-success-emphasis link-offset-1 text-decoration-underline flex-grow-1 flex-md-grow-0">
+                    PDF Data
+                </h3>
+            </div>
+
+            <div class="row justify-content-center mb-3 mt-4 gy-4">
+
+
+
+                <div class="table-responsive">
+                    <table class="table table-bordered table-hover" id="usertable">
+                        <thead class="table-success">
+                            <tr class="text-nowrap">
+                                <th scope="col">#</th>
+                                <th scope="col">Directory</th>
+                                <th scope="col">Original PDF</th>
+                                <th scope="col">Final PDF</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% if data %}
+                            {% for i in data %}
+                            <tr>
+                                <td>{{ loop.index }}</td>
+                                <td>{{ i[4] }}</td>
+                                <td>
+                                    <a href="{{ url_for('download_zip', uid=i[4]) }}" class="btn btn-sm btn-primary">
+                                        Download Input
+                                    </a>
+                                </td>
+                                <td>
+                                    <a href="{{ url_for('download_pdf', uid=i[4]) }}" class="btn btn-sm btn-success">
+                                        Download Final
+                                    </a>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                            {% else %}
+                            {% endif %}
+                        </tbody>
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
+    </div>
+
+    <script src="../static/js/jquery.js"></script>
+    <script src="../static/js/bootstrap.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.12.1/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+
+
+
+    <script>
+        $(function () {
+
+            $('.toast').toast('show');
+
+            $("#date").val(new Date().toISOString().slice(0, 10))
+
+
+            $("#usertable").DataTable({
+                lengthMenu: [
+                    [5, 10, 25, 50, -1],
+                    [5, 10, 25, 50, 'All'],
+                ],
+            });
+
+
+            $('#date').attr("min", new Date().toISOString().split('T')[0]);
+
+
+
+            $("#updatefoodform").on("submit", function (e) {
+                debugger;
+
+                var date = $("#date").val()
+                var food = $("#food").val()
+                var image = $("#image").val()
+
+                var testemail = new RegExp("[a-z0-9]+@[a-z]+\.[a-z]{2,3}");
+                var testphone = new RegExp("^[6-9][0-9]{9}$");
+                var testaadhar = new RegExp("^[2-9]{1}[0-9]{3}[0-9]{4}[0-9]{4}$");
+                var vhnotest = new RegExp('^[A-Z]{2}\\d{2}[A-Z]{1,2}\\d{4}$');
+                var dlnotest = new RegExp('^[A-Z]{2}\\d{2}\\d{11}$');
+                var testusn = new RegExp("^U3BCA\\d{5}$");
+
+
+
+
+                if (date != "") {
+                    $("#date").removeClass("is-invalid");
+                } else {
+                    $("#date").addClass("is-invalid");
+                    e.preventDefault();
+                }
+
+
+                if (food != "") {
+                    $("#food").removeClass("is-invalid");
+                } else {
+                    $("#food").addClass("is-invalid");
+                    e.preventDefault();
+                }
+
+
+                if (image != "") {
+                    $("#image").removeClass("is-invalid");
+                } else {
+                    $("#image").addClass("is-invalid");
+                    e.preventDefault();
+                }
+
+
+
+            })
+
+
+
+
+            $("input,textarea,select").on("keydown change", function () {
+                $(this).removeClass("is-invalid")
+            })
+
+            $("#reset").on("click", function () {
+                $("input,textarea,select").removeClass("is-invalid")
+                $("#fromtime, #totime").removeAttr("max")
+                $("#fromtime, #totime").removeAttr("min")
+            })
+
+
+        })
+    </script>
+
+</body>
+
+
+</html>
