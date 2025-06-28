@@ -1,21 +1,21 @@
-# 🔍 SkillGap Analyzer
+# SkillGap Analyzer
 
 An intelligent web app that analyzes your resume, identifies missing skills for a target job role, and recommends learning resources and job listings. Built with Flask and powered by AI.
 
 ---
 
-## 📌 Features
+## Features
 
-- 📄 **Resume Upload** – Upload your resume in PDF format
-- 🧠 **Skill Extraction** – Extracts key technologies, tools, and job roles from your resume using Mistral AI
-- ⚙️ **Skill Gap Analysis** – Compares your skills against a target job role and highlights missing skills
-- 📺 **Learning Resources** – Recommends YouTube tutorials for upskilling
-- 💼 **Job Matching** – Finds relevant job listings via Adzuna API
-- 👤 **User Login & Registration** – Secure and simple session-based authentication
+-  **Resume Upload** – Upload your resume in PDF format
+-  **Skill Extraction** – Extracts key technologies, tools, and job roles from your resume using Mistral AI
+-  **Skill Gap Analysis** – Compares your skills against a target job role and highlights missing skills
+-  **Learning Resources** – Recommends YouTube tutorials for upskilling
+-  **Job Matching** – Finds relevant job listings via Adzuna API
+-  **User Login & Registration** – Secure and simple session-based authentication
 
 ---
 
-## 💻 Tech Stack
+##  Tech Stack
 
 | Layer         | Technology                    |
 |--------------|-------------------------------|
@@ -29,7 +29,7 @@ An intelligent web app that analyzes your resume, identifies missing skills for 
 
 ---
 
-## 🚀 Getting Started
+##  Getting Started
 
 ### 1. Clone the repository
 
